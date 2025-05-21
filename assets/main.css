@@ -1,0 +1,27 @@
+/* apply font for readability */
+body {
+    font-family: "Arial", sans-serif;
+}
+  
+/* Primary button appearance */
+.custom-button {
+    background-color: #93c5fd;
+    color: white;     /* Initial text color */
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;  /* rounded-lg */
+    font-size: 1.125rem; /* text-lg */
+    position: relative;  /* absolute-positioned children */
+    height: 3rem;
+    width: 12rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Tailwind shadow */
+    transition: all 0.3s ease;  /* smooth transition */
+}  
+
+/* hover effects */
+.custom-button:hover {
+    background-color: #1d4ed8; /* tailwind bg-blue-700 */
+    color: white;  /* ensures the text remains visible */
+}
+  

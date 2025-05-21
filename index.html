@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- page title -->
+    <title>Button</title>
+    <!-- custom stylesheet -->
+    <link href="assets/main.css" rel="stylesheet" type="text/css" />
+    <!-- Tailwind CDN for fallback --> 
+    <link
+      href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="flex w-full place-items-center justify-center min-h-screen bg-gray-100"
+  >
+  <!-- Button element which click alert -->
+    <button
+      onclick="alert('Button clicked!')"
+      class="custom-button group"
+    >
+    <!-- button hover effects -->
+      <div class="inset-0 w-3 absolute transition-all duration-75 ease-out group-hover:w-full"></div>
+      <!-- button text with hover color transition -->
+      <span class="relative group-hover:text-white">CLICK ME!</span>
+    </button>
+  </body>
+</html>
