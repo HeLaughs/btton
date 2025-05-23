@@ -4,25 +4,157 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- page title -->
-    <title>Button</title>
-    <!-- Tailwind CDN for fallback --> 
+    <title>Click-Me</title>
+    <!-- Tailwind CDN for fallback -->
     <link
       href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
+    <style>
+      /* Utility classes */
+      .custom-button {
+        position: relative;
+        overflow: hidden;
+        padding: 1rem 2rem;
+        font-size: 1.25rem;
+        font-weight: bold;
+        border-radius: 9999px;
+        background-color: #4caf60; /* Custom button color */
+        color: white;
+        transition: background-color 0.3s ease;
+      }
+      .custom-button:hover {
+        background-color:rgb(134, 239, 172); /* Hover button bg-color */
+      }
+      /* Body fonts */
+      body {
+        font-family: 'IBM Plex Sans', sans-serif;
+      }
+    </style>
   </head>
-  <body
-    class="flex w-full place-items-center justify-center min-h-screen bg-gray-100"
-  >
-  <!-- Button element which click alert -->
-    <button
-      onclick="alert('Button clicked!')"
-      class="custom-button group"
+  <body class="flex flex-col min-h-screen bg-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-gradient-to-r from-green-300 via-gray-500 text-white p-4">
+      <div class="container mx-auto flex justify-between items-center">
+      <!-- logo -->
+        <a href="#" class="text-lg font-bold">Click Me</a>
+    <!-- Hamburger Menu Toggle -->
+    <div class="md:hidden">
+    <!-- hidden checkbox for menu toggle -->
+      <input type="checkbox" id="menu-toggle" class="hidden peer" />
+      <!-- label for checkbox to act as hamburger button -->
+      <label
+        for="menu-toggle"
+        class="cursor-pointer block text-green-500 focus:outline-none"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16m-7 6h7"
+          ></path>
+        </svg>
+      </label>
+    </div>
+
+        <!-- Sidebar Menu -->
+    <ul
+      id="menu"
+      class="fixed top-0 left-0 h-full w-64 bg-gray-800 text-green-300 transform -translate-x-full transition-transform duration-300 peer-checked:translate-x-0 md:relative md:flex md:space-x-4 md:translate-x-0 md:bg-transparent md:h-auto md:w-auto md:text-gray-900"
     >
-    <!-- button hover effects -->
-      <div class="inset-0 w-3 absolute transition-all duration-75 ease-out group-hover:w-full"></div>
-      <!-- button text with hover color transition -->
-      <span class="relative group-hover:text-white">CLICK ME!</span>
-    </button>
+      <li class="border-b border-gray-700 md:border-none">
+        <a href="#" class="block p-4 hover:bg-gray-700 md:hover:bg-transparent">Home</a>
+      </li>
+      <li class="border-b border-gray-700 md:border-none">
+        <a href="#about" class="block p-4 hover:bg-gray-700 md:hover:bg-transparent">About</a>
+      </li>
+      <li class="border-b border-gray-700 md:border-none">
+        <a href="#contact" class="block p-4 hover:bg-gray-700 md:hover:bg-transparent">Contact</a>
+      </li>
+      <li class="border-b border-gray-700 md:border-none">
+        <a href="#blog" class="block p-4 hover:bg-gray-700 md:hover:bg-transparent">Blog</a>
+      </li>
+      <li>
+        <a href="#gallery" class="block p-4 hover:bg-gray-700 md:hover:bg-transparent">Gallery</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+    
+    <!-- Main content -->
+    <div id="predict" class="flex flex-1 items-center justify-center">
+      <!-- Form with button -->
+      <form
+        onsubmit="predictName(event)"
+        class="bg-white p-6 rounded-lg shadow-md"
+      >
+        <label for="name" class="block text-gray-700 font-medium mb-2">Enter Your Name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          class="w-full p-2 border border-gray-300 rounded-lg mb-2"
+          placeholder="Enter your name"
+          required
+        />
+        <div id="prediction" class="text-lg font-medium text-gray-700 mb-4"></div>
+        <button
+          type="submit"
+          class="custom-button group relative inline-flex items-center justify-center px-6 py-3 text-white bg-green-400 border border-transparent rounded-lg shadow-sm hover:bg-green-300"
+        >
+          <div
+            class="absolute inset-0 w-3 transition-all duration-75 ease-out group-hover:w-full "
+          ></div>
+          <span class="relative group-hover:text-gray-900">Click-Me</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- About Section -->
+    <div id="about" class="bg-gradient-to-r from-green-300 via-gray-500 p-10 mt-8 rounded-lg shadow-lg">
+      <div class="container mx-auto text-center">
+        <h2 class="text-3xl font-extrabold text-black mb-6">About Click Me</h2>
+        <p class="text-gray-900 text-lg mb-4">
+          This is a simple name prediction button that uses basic logic to generate a friendly message based on the name you enter.
+        </p>
+        <p class="text-gray-900 text-lg mb-4">
+          It's just for fun!
+        </p>
+      </div>
+    </div>
+
+    <script>
+      function predictName(event) {
+        event.preventDefault(); // Prevent form submission
+        const nameInput = document.getElementById('name').value.trim();
+        const predictionDiv = document.getElementById('prediction');
+
+        // Friendly prediction logic
+        if (!nameInput) {
+          predictionDiv.textContent = 'Please enter a name to get a prediction!';
+          // predictionDiv.className = 'text-red-500 font-bold mt-4';
+          return;
+        }
+
+        const lowerName = nameInput.toLowerCase();
+        predictionDiv.className = 'text-green-500 font-bold mt-4';
+        if (lowerName === 'chris') {
+          predictionDiv.textContent = 'Hello, Chris! You have a timeless and classic name.';
+        } else if (lowerName === 'james') {
+          predictionDiv.textContent = 'Hi James! Your name radiates elegance and charm.';
+        } else if (lowerName === 'isaac') {
+          predictionDiv.textContent = 'Hey Isaac! Your name is versatile and full of energy.';
+        } else {
+          predictionDiv.textContent = `Nice to meet you, ${nameInput}! Your name is unique and wonderful.`;
+        }
+      }
+    </script>
   </body>
 </html>
